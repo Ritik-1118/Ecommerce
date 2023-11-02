@@ -4,15 +4,15 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
-
+import cors from "cors";
 //configure env
 dotenv.config();
 
 //Database config
 connectDB();
-
 // rest object
 const app = express();
+app.use(cors());
 const Port = process.env.PORT || 4000;
 
 //middleware

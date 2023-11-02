@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
@@ -12,6 +13,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,29 +29,33 @@ const SignupPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("api/v1/auth/register", {
-        name,
-        email,
-        password,
-        phone,
-        address,
-      });
+      const res = await axios.post(
+        "http://localhost:8080/api/v1/auth/register",
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+        }
+      );
       if (res.data.success) {
         toast.success(res.data.message);
+        router.push("/");
       } else {
-        toast.error();
+        toast.error("Registration not successful");
       }
     } catch (error) {
-      console.log(error);
-      toast.success("Regiser not Successfull");
+      console.log(error); // Log the error to the console
+      toast.error("An error occurred during registration. Please try again.");
     }
   };
   // console.log(process.env.React_APP_API);
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 max-w-xl mx-auto">
-        <ToastContainer />
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-lg transform -skew-y-6 sm:skew-y-6 -rotate-3 sm:-rotate-2 rounded-3xl sm:rounded-3xl"></div>
+        <ToastContainer />
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
             <div>
