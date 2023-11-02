@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Link from "next/link";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
@@ -21,15 +23,32 @@ const SignupPage = () => {
     setPassword(randomPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(name, email, phone, address, password);
+    try {
+      const res = await axios.post("api/v1/auth/register", {
+        name,
+        email,
+        password,
+        phone,
+        address,
+      });
+      if (res.data.success) {
+        toast.success(res.data.message);
+      } else {
+        toast.error();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.success("Regiser not Successfull");
+    }
   };
-
+  // console.log(process.env.React_APP_API);
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 max-w-xl mx-auto">
+        <ToastContainer />
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-lg transform -skew-y-6 sm:skew-y-6 -rotate-3 sm:-rotate-2 rounded-3xl sm:rounded-3xl"></div>
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
