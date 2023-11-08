@@ -59,7 +59,7 @@ const Navbar = () => {
           <ul className="flex flex-col p-4 md:p-0 mt-4 text-xl navmer font-medium text-center  md:mr-9  rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0    ">
             <li>
               <Link
-                href="/home"
+                href="/"
                 className="block py-2 pl-3 flex pr-4 text-center justify-center text-cyan-500  hover:text-cyan-700  rounded md:bg-transparent  md:p-0 "
                 aria-current="page"
               >

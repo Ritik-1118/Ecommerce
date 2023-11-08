@@ -34,9 +34,8 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 max-w-xl mx-auto">
-        <ToastContainer />
-
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-lg transform -skew-y-6 sm:skew-y-6 -rotate-3 sm:-rotate-2 rounded-3xl sm:rounded-3xl"></div>
+        <ToastContainer />
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
             <div>
